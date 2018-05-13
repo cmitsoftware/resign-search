@@ -1,0 +1,6 @@
+server:
+  port: 8081
+  servlet:
+    contextPath: /resign/search
+logging:
+  file: "E:\\temp\\resign\\resign-search.log"
