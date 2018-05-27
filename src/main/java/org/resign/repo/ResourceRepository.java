@@ -1,6 +1,7 @@
 package org.resign.repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +28,9 @@ public interface ResourceRepository extends MongoRepository<Resource, String> {
 			+ "{'surname': {$regex : ?0, $options: 'i'}},"
 			+ "{'desc': {$regex : ?0, $options: 'i'}}"
 			+ "] }")
-	public Page<Resource> searchFullText(@Param("name") String name, Pageable pageable);
+	public Page<Resource> searchFullText(@Param("search") String search, Pageable pageable);
     
+	
    /*
     * Prevents POST /people and PATCH/PUT /resource/:id(non-Javadoc)
     * @see org.springframework.data.repository.CrudRepository#save(S)
@@ -46,4 +48,8 @@ public interface ResourceRepository extends MongoRepository<Resource, String> {
     @RestResource(exported = false)
     public void delete(Resource r);
 	
+//    @Override
+//    @RestResource(exported = false)
+//    public Optional<Resource> findById(String id);
+    
 }
