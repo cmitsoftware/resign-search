@@ -11,7 +11,8 @@ import com.mongodb.MongoClient;
 @Configuration
 //@EnableMongoRepositories(basePackages = {"org.resign.repo"})
 @PropertySource(
-		value={"classpath:db.properties"},
+//		value={"classpath:db.properties"},
+		value = {"file:${spring.config.additional-location}/db.properties"},
         ignoreResourceNotFound = true)
 public class DatabaseConfiguration extends AbstractMongoConfiguration {
 	
