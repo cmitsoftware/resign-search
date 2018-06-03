@@ -27,5 +27,4 @@ public class Tag {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-    
 }

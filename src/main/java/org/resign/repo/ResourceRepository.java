@@ -14,19 +14,28 @@ import org.springframework.data.rest.core.annotation.RestResource;
 @RepositoryRestResource(collectionResourceRel = "resource", path = "resource")
 public interface ResourceRepository extends MongoRepository<Resource, String> {
 
-	@Query(value = "{ $or:["
-			+ "{'name': {$regex : ?0, $options: 'i'}},"
-			+ "{'surname': {$regex : ?0, $options: 'i'}},"
-			+ "{'desc': {$regex : ?0, $options: 'i'}},"
-			+ "{'tags.name': {$regex : ?0, $options: 'i'}},"
-			+ "{'tags.id': ?1}"
-			+ "] }")
-	public Page<Resource> searchFullTextOrByTag(@Param("search") String search, @Param("tagId") String tagId, Pageable pageable);
+	@Query(value = "{"
+					+ "$or:["
+						+ "{'name': {$regex : ?0, $options: 'i'}},"
+						+ "{'surname': {$regex : ?0, $options: 'i'}},"
+						+ "{'desc': {$regex : ?0, $options: 'i'}},"
+						+ "{'tags.name': {$regex : ?0, $options: 'i'}},"
+						+ "{'tags.id': ?1}"
+					+ "] "
+				+ ","
+				+ "'status': 2"
+//				+ "'visibleFrom': {$lte: ISODate}"
+			+ "}")
+	public Page<Resource> searchFullTextOrByTag(
+			@Param("search") String search, 
+			@Param("tagId") String tagId, 
+			Pageable pageable);
 	
 	@Query(value = "{ $or:["
 			+ "{'name': {$regex : ?0, $options: 'i'}},"
 			+ "{'surname': {$regex : ?0, $options: 'i'}},"
-			+ "{'desc': {$regex : ?0, $options: 'i'}}"
+			+ "{'desc': {$regex : ?0, $options: 'i'}},"
+			+ "{'tags.name': {$regex : ?0, $options: 'i'}}"
 			+ "] }")
 	public Page<Resource> searchFullText(@Param("search") String search, Pageable pageable);
     
