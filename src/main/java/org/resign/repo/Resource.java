@@ -3,9 +3,12 @@ package org.resign.repo;
 import java.util.Date;
 import java.util.List;
 
+import org.resign.embedded.ResourceImage;
 import org.resign.embedded.ResourceTag;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document
 public class Resource {
@@ -29,6 +32,9 @@ public class Resource {
     private Date creation;
     private Date activation;
     private List<ResourceTag> tags;
+    
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)    
+    private List<ResourceImage> images;
 
     public Resource() {}
     
@@ -103,5 +109,11 @@ public class Resource {
 	}
 	public void setTags(List<ResourceTag> tags) {
 		this.tags = tags;
+	}
+	public List<ResourceImage> getImages() {
+		return images;
+	}
+	public void setImages(List<ResourceImage> images) {
+		this.images = images;
 	}
 }
